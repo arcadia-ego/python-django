@@ -13,4 +13,10 @@ class Bookmark_Serializer(serializers.HyperlinkedModelSerializer):
 
 class Bookmark_Viewset(viewsets.ModelViewSet):
     serializer_class = Bookmark_Serializer
-    queryset = Bookmark.objects.all()
+    queryset = Bookmark.objects.none()
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_anonymous:
+            return queryset
+        else:
+            return Bookmark.objects.filter(user=user)

@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from rest_framework import routers
+from Bookmark.api import Bookmark_Viewset
+router = routers.DefaultRouter()
+router.register(r'bookmark', Bookmark_Viewset)
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
 ]

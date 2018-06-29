@@ -15,8 +15,9 @@ class Bookmark_Viewset(viewsets.ModelViewSet):
     serializer_class = Bookmark_Serializer
     queryset = Bookmark.objects.none()
     def get_queryset(self):
+        # queryset = Bookmark.objects.none()
         user = self.request.user
         if user.is_anonymous:
-            return queryset
+            return Bookmark.objects.none()
         else:
             return Bookmark.objects.filter(user=user)
